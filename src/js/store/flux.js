@@ -13,12 +13,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			naves:[]
+			naves:[],
+			message: 'incializada desde flux',
+			naves_clickeadas: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+			changeMessage: (nombreNave) => {
+				console.log('changeMessage' + nombreNave)
+				
+				setStore({ message: nombreNave });
+				const store = getStore();
+				if( store.naves_clickeadas.includes(nombreNave) ){
+					console.log('Ya esta en la lista')
+					// eliminar el elemento
+					setStore({ naves_clickeadas: store.naves_clickeadas.filter( (repetido)=> repetido != nombreNave )});
+				}else {
+					console.log('No esta en la lista')
+					setStore({ naves_clickeadas: [...store.naves_clickeadas , nombreNave  ]});
+				}
+
+				
+				
+				console.log(store.naves_clickeadas)
+
+				
+
 			},
 			loadSomeData: () => {
 				/**

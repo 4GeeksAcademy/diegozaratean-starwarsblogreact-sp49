@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Nave = (props) => {
+
+	const { store, actions } = useContext(Context);
+
 	return (
-		<div className="card" style={{width: "18rem"}}>
+		<div className="card mx-3" style={{width: "18rem"}}>
 			<img src="..." className="card-img-top" alt="..."/>
 			<div className="card-body">
 				<h5 className="card-title">{props.name}</h5>
@@ -13,6 +17,7 @@ export const Nave = (props) => {
                 <Link className="btn btn-primary" to={"/nave_info/" + props.uid }>
                     <span>Ver mas</span>
                 </Link>
+				<button onClick={()=>actions.changeMessage(props.name)}>Cambiar texto</button>
 			</div>
 		</div>
 	);
